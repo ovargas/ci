@@ -1,0 +1,24 @@
+name: Check
+
+on:
+  workflow_call:
+
+jobs:
+  unit-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+          check-latest: true
+      - name: Lint
+        timeout-minutes: 15
+        run: make lint
+      - name: Unit Test
+        timeout-minutes: 15
+        run: make test
+
+
+
