@@ -1,0 +1,34 @@
+name: Version
+
+on:
+  workflow_call:
+    inputs:
+      tag_format:
+        type: string
+        default: ${version}
+        required: true
+      dry_run:
+        type: boolean
+        default: true
+        required: true
+
+
+jobs:
+  version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Token
+        uses: actions/create-github-app-token@v1
+        id: token
+        with:
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.PRIVATE_KEY }}
+      - name: Checkout
+      - uses: actions/checkout@v2
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v4
+        with:
+          dry_run: ${{ inputs.dry_run }}
+          tag_format: ${{ inputs.tag_format }}
+        env:
+          GITHUB_TOKEN: ${{ steps.token.outputs.token }}

@@ -8,8 +8,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-go@v5
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup
+        uses: actions/setup-go@v5
         with:
           go-version-file: 'go.mod'
           check-latest: true
