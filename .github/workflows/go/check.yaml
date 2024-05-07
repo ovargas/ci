@@ -2,10 +2,23 @@ name: Check
 
 on:
   workflow_call:
+    inputs:
+      MYSQL:
+        description: MySQL version to be used
+        type: string
+        default: "mysql:8.0.11"
 
 jobs:
   unit-test:
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: ${{ inputs.MYSQL_TAG }}
+        env:
+          MYSQL_DATABASE: localdb
+          MYSQL_ROOT_PASSWORD: password
+        ports:
+          - 3306:3306
     steps:
       - name: Checkout
         uses: actions/checkout@v2
