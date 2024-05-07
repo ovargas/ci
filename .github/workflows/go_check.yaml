@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       mysql:
-        image: ${{ inputs.MYSQL_TAG }}
+        image: ${{ inputs.MYSQL }}
         env:
           MYSQL_DATABASE: localdb
           MYSQL_ROOT_PASSWORD: password
