@@ -16,10 +16,12 @@ jobs:
           check-latest: true
       - name: Lint
         timeout-minutes: 15
-        run: make lint
+        run: |
+          make lint
       - name: Unit Test
         timeout-minutes: 15
-        run: make test
+        run: |
+          make test
 
 
 
